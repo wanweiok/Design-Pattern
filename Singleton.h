@@ -1,13 +1,36 @@
 #pragma once
 
 #include "pch.h"
+#include <iostream>
+
+using namespace std;
 
 class Singleton
 {
 public:
 	static Singleton* Instance();
 protected:
-	Singleton(){};
+	Singleton() {};
 private:
 	static Singleton* _instance;
+
+	class GC
+	{
+	public:
+		GC() {
+			cout << "GC construction" << endl;
+		}
+		~GC() {
+			cout << "GC destruction" << endl;
+			if (_instance != NULL)
+			{
+				delete _instance;
+				_instance = NULL;
+				cout << "Singleton destruction" << endl;
+				system("pause");
+			}
+		}
+	};
+
+	static GC gc;
 };
