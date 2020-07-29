@@ -34,3 +34,17 @@ private:
 
 	static GC gc;
 };
+
+class Monostate {
+public: 
+	Monostate() {};
+	void setX(int x) {
+		itsX = x;
+	}
+	int getX() {
+		return itsX;
+	}
+
+private:
+	static int itsX;
+};
